@@ -1,1 +1,1 @@
-web: gunicorn art:app
+web: gunicorn art:app
