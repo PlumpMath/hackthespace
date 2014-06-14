@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask import render_template
 from flask import Response
 import json
 import random
@@ -45,7 +46,8 @@ def images():
 @app.route('/random-image')
 def randomimage():
   n = random.randint(0, len(getlinks()))
-  return Response(json.dumps({'image':getlinks()[n]}), mimetype='application/json')
+  #return Response(json.dumps({'image':getlinks()[n]}), mimetype='application/json')
+  return render_template('random-image.html', url=getlinks()[n])
 
 if __name__ == '__main__':
   app.run(debug=True)
