@@ -8,7 +8,33 @@
     </header>
     -->
     <p>
-      <img src="{{url}}">
+      <img src="{{data.url}}">
+    </p>
+    <p>
+      Contribs (all time): {{data.hits}}
+    </p>
+
+    <p>
+      Contribs (this art): {{data.hits_artwork}}
+    </p>
+
+    <p>
+      Things (this art):
+      <ul>
+        {% for thing in data.things_artwork %}
+        <li>{{thing[0]}} ({{thing[1]}})</li>
+        {% endfor %}
+      </ul>
+    </p>
+
+
+    <p>
+      Things (all time):
+      <ul>
+        {% for thing in data.things %}
+        <li>{{thing[0]}} ({{thing[1]}})</li>
+        {% endfor %}
+      </ul>
     </p>
   </div>
 </section>
