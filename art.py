@@ -75,7 +75,7 @@ def get():
 @app.route('/tell', methods=['POST'])
 def set():
   dbset(request.form)
-  return 'Thank you. View other contributions <a href="/show">here</a>.'
+  return render_template('thanks.html')
 
 @app.route('/images')
 def images():
