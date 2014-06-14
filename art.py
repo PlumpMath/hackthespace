@@ -1,7 +1,9 @@
 import os
 from flask import Flask
 from flask import render_template
+from flask import request
 from flask import Response
+from flask_negotiate import consumes, produces
 import json
 import random
 from redis import Redis
@@ -19,7 +21,11 @@ def getlinks():
       links = [line.rstrip() for line in f]
   return links
 
-def dbset():
+def dbset(form):
+  print 'Received form input'
+  print form['thing1']
+  print form['thing2']
+  print form['thing3']
   redis.set(app.config['REDIS_DB'] + ':xxx', 42)
 
 def dbget():
@@ -29,25 +35,38 @@ def dbget():
 def main():
   return 'main'
 
-@app.route('/artwork', methods=['GET'])
+# tell
+
+@app.route('/tell', methods=['GET'])
 def get():
   result = dbget()
-  return Response(json.dumps(result), mimetype='application/json')
+  #return Response(json.dumps(result), mimetype='application/json')
+  return render_template('tell.html', url=_showimage())
 
-@app.route('/artwork', methods=['POST'])
+@app.route('/tell', methods=['POST'])
 def set():
-  dbset()
-  return 'OK'
+  dbset(request.form)
+  return 'Thank you.'
 
 @app.route('/images')
 def images():
   return Response(json.dumps(getlinks()), mimetype='application/json')
 
-@app.route('/random-image')
-def randomimage():
+# show
+
+def _showimage():
   n = random.randint(0, len(getlinks()))
-  #return Response(json.dumps({'image':getlinks()[n]}), mimetype='application/json')
-  return render_template('random-image.html', url=getlinks()[n])
+  return getlinks()[n]
+
+@app.route('/show')
+@produces('text/html', '*/*')
+def showimage_html():
+  return render_template('show.html', url=_showimage())
+
+@app.route('/show')
+@produces('application/json')
+def showimage_json():
+  return Response(json.dumps({'image':_showimage()}), mimetype='application/json')
 
 if __name__ == '__main__':
   app.run(debug=True)

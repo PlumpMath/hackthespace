@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+<section id="one" class="main style2 right dark fullscreen">
+  <div class="content box style2">
+    <header>
+      <h2>Tell us</h2>
+    </header>
+    <p>
+      <img src="{{url}}">
+      </p>
+
+      <form action="/tell" method="POST">
+        Thing 1: <input id="thing1" name="thing1" placeholder="a noun for something you recognise in the image">
+        <br>
+        Thing 2: <input id="thing2" name="thing2" placeholder="a noun for something you recognise in the image">
+        <br>
+        Thing 3: <input id="thing3" name="thing3" placeholder="a noun for something you recognise in the image">
+        <br>
+        <input type="submit">
+      </form>
+  </div>
+</section>
+{% endblock %}
