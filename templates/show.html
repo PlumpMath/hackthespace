@@ -1,41 +1,94 @@
 {% extends "index.html" %}
 {% block content %}
-<section id="one" class="main style2 right dark fullscreen">
-  <div class="content box style2">
-    <!--
-    <header>
-      <h2>Image</h2>
-    </header>
-    -->
-    <p>
+  <div class="row">
+    <div class="col-md-12">
       <img src="{{data.url}}">
-    </p>
-    <p>
-      Contribs (all time): {{data.hits}}
-    </p>
+    </div>
 
-    <p>
-      Contribs (this art): {{data.hits_artwork}}
-    </p>
+    <div class="col-md-12">
+      <h1>Words used to describe this art</h1>
+    </div>
 
-    <p>
-      Things (this art):
-      <ul>
-        {% for thing in data.things_artwork %}
-        <li>{{thing[0]}} ({{thing[1]}})</li>
-        {% endfor %}
-      </ul>
-    </p>
+    <div class="col-md-6">
+      <h2 class="text-muted">This art</h2>
+      <div class="well">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Word</td>
+              <td>Count</td>
+            </tr>
+          </thead>
+          {% for thing in data.things_artwork %}
+          <tr>
+            <td>
+              <span class="text-primary">
+                {{thing[0]}}
+              </span>
+            </td>
+            <td>
+              <span class="badge">
+              {{ '%0.f'| format(thing[1]|float) }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text-muted">All time</h2>
+      <div class="well">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Word</td>
+              <td>Count</td>
+            </tr>
+          </thead>
+          {% for thing in data.things %}
+          <tr>
+            <td>
+              <span class="text-primary">
+                {{thing[0]}}
+              </span>
+            </td>
+            <td>
+              <span class="badge">
+              {{ '%0.f'| format(thing[1]|float) }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
 
 
-    <p>
-      Things (all time):
-      <ul>
-        {% for thing in data.things %}
-        <li>{{thing[0]}} ({{thing[1]}})</li>
-        {% endfor %}
-      </ul>
-    </p>
+
+    <div class="col-md-12">
+      <h1>Contributions</h1>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text-muted">This art</h2>
+      <div class="well">
+        <span class="badge">
+          {{data.hits_artwork}}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <h2 class="text-muted">All time</h2>
+      <div class="well">
+        <span class="badge">
+          {{data.hits}}
+        </span>
+      </div>
+    </div>
+
   </div>
-</section>
 {% endblock %}

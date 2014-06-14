@@ -1,24 +1,33 @@
 {% extends "index.html" %}
 {% block content %}
-<section id="one" class="main style2 right dark fullscreen">
-  <div class="content box style2">
-    <header>
-      <h2>Tell us</h2>
-    </header>
-    <p>
-      <img src="{{url}}">
-      </p>
+<div class="row">
+  <div class="col-md-12">
 
-      <form action="/tell" method="POST">
-        <input type="hidden" name="url" value="{{url}}">
-        Thing 1: <input id="thing1" name="thing1" placeholder="a noun for something you recognise in the image">
-        <br>
-        Thing 2: <input id="thing2" name="thing2" placeholder="a noun for something you recognise in the image">
-        <br>
-        Thing 3: <input id="thing3" name="thing3" placeholder="a noun for something you recognise in the image">
-        <br>
-        <input type="submit">
-      </form>
+    <h1>What do you see?</h1>
+
+    <img src="{{url}}">
+    <br><br>
+
+    <form role="form" action="/tell" method="POST">
+      <input type="hidden" name="url" value="{{url}}">
+
+      <div class="form-group">
+        <label for="thing1">Word 1</label>
+        <input id="thing1" class="form-control" name="thing1" placeholder="One word that describes this image, e.g. woman">
+      </div>
+
+      <div class="form-group">
+        <label for="thing2">Word 2</label>
+        <input id="thing2" class="form-control" name="thing2" placeholder="Another word that describes it, e.g. blue">
+      </div>
+
+      <div class="form-group">
+        <label for="thing3">Word 3</label>
+        <input id="thing3" class="form-control" name="thing3" placeholder="Yet another, e.g. passionate">
+      </div>
+
+      <input type="submit">
+    </form>
   </div>
-</section>
+</div>
 {% endblock %}
