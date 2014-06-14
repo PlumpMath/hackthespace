@@ -64,7 +64,7 @@ def dbget(url, topN=10):
 
 @app.route('/')
 def main():
-  return 'main'
+  return render_template('main.html')
 
 # tell
 
